@@ -10,7 +10,16 @@ public class Main {
     static int Prune(LinkedList<Integer>[] arrOfList){
         //arrOfList will be tree
         int prunedNodes = arrOfList.length;
-        while(true){
+        for (int i = 0; i < arrOfList.length; i++){
+            int node = i;
+            while (arrOfList[node].size() == 1 && !phoRests[node]){
+                int temp = arrOfList[node].remove();
+                arrOfList[temp].remove((Integer)node);
+                prunedNodes--;
+                node = temp;
+            }
+        }
+        /*while(true){
             boolean pruned = false;
             for (int i = 0; i < arrOfList.length; i++){
                 if (arrOfList[i].size() == 1 && !phoRests[i]){
@@ -24,7 +33,7 @@ public class Main {
             if (pruned == false){
                 break;
             }
-        }
+        }*/
         //return # of nodes after pruned
         return prunedNodes;
     }
